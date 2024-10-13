@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Exercise Tracker</h1>
+        <div id="exercise-form">
+            <label for="exerciseName">Exercise Name:</label>
+            <input type="text" id="exerciseName" placeholder="Enter exercise name">
+
+            <label for="duration">Time Duration (minutes):</label>
+            <input type="number" id="duration" placeholder="Enter duration">
+
+            <button id="addExerciseBtn">Add Exercise</button>
+        </div>
+
+        <ul id="exerciseList"></ul>
+
+        <button id="startBtn" disabled>Start</button>
+        <div id="timerDisplay"></div>
+        <div id="controls">
+    <button id="pauseResumeBtn" disabled>Pause</button>
+    <button id="endTaskBtn" disabled>End Task</button>
+    <button id="skipBreakBtn" style="display:none;">Skip Break</button> 
+</div>
+
+       
+        
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

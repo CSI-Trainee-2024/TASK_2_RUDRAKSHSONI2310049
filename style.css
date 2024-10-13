@@ -1,0 +1,158 @@
+/* CSS for Exercise Timer App */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Responsive Container */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addExerciseBtn {
+    background-color: #28a745;
+    color: white;
+}
+
+#addExerciseBtn:hover {
+    background-color: #218838;
+}
+
+#startBtn {
+    background-color: #007bff;
+    color: white;
+}
+
+#startBtn:hover {
+    background-color: #0069d9;
+}
+
+#pauseResumeBtn {
+    background-color: #ffc107;
+    color: black;
+}
+
+#pauseResumeBtn:hover {
+    background-color: #e0a800;
+}
+
+#endTaskBtn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#endTaskBtn:hover {
+    background-color: #c82333;
+}
+
+#skipBreakBtn {
+    background-color: #f39c12;
+    color: white;
+}
+
+#skipBreakBtn:hover {
+    background-color: #e67e22;
+}
+
+/* Timer Display */
+#timerDisplay {
+    font-size: 48px; /* Larger font size for clock appearance */
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #007bff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: inline-block; /* Centering effect */
+}
+
+/* Exercise List Styles */
+.exercise-list {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.exercise-list li {
+    list-style: none;
+    padding: 10px;
+    background-color: #f8f9fa;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.exercise-list button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.exercise-list button:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Background Image for the entire app */
+body::before {
+    content: "";
+    background: url('https://images.unsplash.com/photo-1527515695818-63c0c8d1e4f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fGV4ZXJjaXNlJTIwdGltZXxlbnwwfHx8fDE2OTM5Nzc0NDA&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center fixed;
+    opacity: 0.1; /* Make background image subtle */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1; /* Ensure background is behind all content */
+}

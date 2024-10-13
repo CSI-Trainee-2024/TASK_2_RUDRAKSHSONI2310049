@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Summary</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #4A90E2;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        li span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        li strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercise Summary</h1>
+    <ul id="summaryList"></ul>
+
+    <script>
+        // Retrieve the summary data from localStorage
+        const summary = JSON.parse(localStorage.getItem('exerciseSummary'));
+        const summaryList = document.getElementById('summaryList');
+
+        if (summary && summary.length > 0) {
+            summary.forEach(exercise => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span><strong>Exercise:</strong> ${exercise.name}</span>
+                    <span><strong>Duration:</strong> ${exercise.duration / 60} minutes</span>
+                    <span><strong>Time Spent:</strong> ${Math.floor(exercise.timeSpent / 60)} min ${exercise.timeSpent % 60} sec</span>
+                `;
+                summaryList.appendChild(li);
+            });
+        } else {
+            summaryList.innerHTML = '<li>No exercise data found.</li>';
+        }
+    </script>
+
+</body>
+</html>
