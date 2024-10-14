@@ -3,7 +3,9 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    /* background: linear-gradient(to right, #6dd5ed, #2193b0);
+     */
+     background: url('https://media.istockphoto.com/id/1324813307/photo/empty-yoga-class-with-exercise-mats-on-parquet-floor-and-walled-garden-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=chbr92G0m9RZ5_-pCGnHQqANmvgzKihHdxl9SeAQqL4=') no-repeat center center fixed;
     color: #333;
     text-align: center;
 }
@@ -94,10 +96,10 @@ button {
     font-size: 48px; /* Larger font size for clock appearance */
     margin: 20px 0;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    border: 2px solid #007bff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* background-color: #fff; */
+    /* border-radius: 10px; */
+    /* border: 2px solid #007bff; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
     display: inline-block; /* Centering effect */
 }
 
@@ -149,7 +151,7 @@ button {
 /* Background Image for the entire app */
 body::before {
     content: "";
-    background: url('https://images.unsplash.com/photo-1527515695818-63c0c8d1e4f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fGV4ZXJjaXNlJTIwdGltZXxlbnwwfHx8fDE2OTM5Nzc0NDA&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center fixed;
+    background: url('https://media.istockphoto.com/id/1324813307/photo/empty-yoga-class-with-exercise-mats-on-parquet-floor-and-walled-garden-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=chbr92G0m9RZ5_-pCGnHQqANmvgzKihHdxl9SeAQqL4=') no-repeat center center fixed;
     opacity: 0.1; /* Make background image subtle */
     height: 100%;
     width: 100%;

@@ -2,7 +2,7 @@ let exercises = [];
 let currentExerciseIndex = 0;
 let timer;
 let isPaused = false;
-let remainingTime;  // Keeps track of remaining time when paused
+let remainingTime;
 const timerDisplay = document.getElementById('timerDisplay');
 const pauseResumeBtn = document.getElementById('pauseResumeBtn');
 const endTaskBtn = document.getElementById('endTaskBtn');
@@ -23,7 +23,6 @@ document.getElementById('addExerciseBtn').addEventListener('click', () => {
         document.getElementById('startBtn').disabled = false;
     }
 });
-
 function renderExercises() {
     const exerciseList = document.getElementById('exerciseList');
     exerciseList.innerHTML = '';
@@ -35,7 +34,6 @@ function renderExercises() {
         `;
         exerciseList.appendChild(li);
     });
-
     document.querySelectorAll('.skipBtn').forEach(button => {
         button.addEventListener('click', skipExercise);
     });
@@ -59,18 +57,12 @@ endTaskBtn.addEventListener('click', () => {
     clearInterval(timer);
     saveSummaryAndNavigate();
 });
-skipBreakBtn.addEventListener('click', () => {
-    clearInterval(timer);
-    skipBreakBtn.style.display = 'none';
-    startNextExercise();
-});
 
 function startExercise(index) {
     if (index >= exercises.length) {
         saveSummaryAndNavigate();
         return;
     }
-
     const exercise = exercises[index];
     remainingTime = exercise.duration;
     timerDisplay.textContent = `Exercise: ${exercise.name} - Remaining Time: ${formatTime(remainingTime)}`;
@@ -101,7 +93,7 @@ function resumeTimer() {
         if (remainingTime > 0) {
             remainingTime--;
             exercises[currentExerciseIndex].executionTime++;
-            timerDisplay.textContent = `Exercise: ${exercises[currentExerciseIndex].name} - Remaining Time: ${formatTime(remainingTime)}`;
+            timerDisplay.textContent = ` Remaining Time: ${formatTime(remainingTime)}`;
         } else {
             clearInterval(timer);
             exercises[currentExerciseIndex].completed = true;
@@ -119,6 +111,8 @@ function startBreak() {
         if (breakTime > 0) {
             breakTime--;
             timerDisplay.textContent = `Break - Remaining Time: ${formatTime(breakTime)}`;
+            
+
         } else {
             clearInterval(timer);
             skipBreakBtn.style.display = 'none'; 
@@ -142,7 +136,6 @@ function skipExercise(event) {
     if (timer) {
         clearInterval(timer);
     }
-    currentExerciseIndex = parseInt(index) + 1;
     startBreak();
 }
 function saveSummaryAndNavigate() {
@@ -160,11 +153,15 @@ function formatTime(seconds) {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
+
 skipBreakBtn.addEventListener('click', () => {
     clearInterval(timer);
     skipBreakBtn.style.display = 'none';
-    startNextExercise(); 
+    startNextExercise();
 });
+
+
+
 
 
 
