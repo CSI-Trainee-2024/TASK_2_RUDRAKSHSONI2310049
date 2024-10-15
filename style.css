@@ -2,9 +2,6 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
-    /* background: linear-gradient(to right, #6dd5ed, #2193b0);
-     */
-     background: url('https://media.istockphoto.com/id/1324813307/photo/empty-yoga-class-with-exercise-mats-on-parquet-floor-and-walled-garden-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=chbr92G0m9RZ5_-pCGnHQqANmvgzKihHdxl9SeAQqL4=') no-repeat center center ;
     color: #333;
     text-align: center;
 }
@@ -86,11 +83,16 @@ button {
 
 
 #timerDisplay {
-    font-size: 48px; 
-    margin: 20px 0;
-    padding: 20px;
- 
-    display: inline-block; }
+    font-size: 48px; /* Large font for the timer */
+    color: #333;
+    text-align: center;
+    background-color: #e0e0e0; /* Light background for contrast */
+    border: 5px solid #4CAF50; /* Green border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space inside the box */
+    margin: 20px 0; /* Space around the timer display */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+}
 
 
 .exercise-list {
@@ -143,4 +145,11 @@ body::before {
     width: 100%;
     position: absolute;
     z-index: -1;
+}
+body{
+    padding: 6rem 0;
+    background: url("https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
+    background-attachment: fixed;
+    position: relative;
+    z-index: 4;
 }

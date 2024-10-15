@@ -6,31 +6,40 @@ let remainingTime;
 const timerDisplay = document.getElementById('timerDisplay');
 const pauseResumeBtn = document.getElementById('pauseResumeBtn');
 const endTaskBtn = document.getElementById('endTaskBtn');
-const skipBreakBtn = document.getElementById('skipBreakBtn'); 
+const skipBreakBtn = document.getElementById('skipBreakBtn');
 document.getElementById('addExerciseBtn').addEventListener('click', () => {
     const name = document.getElementById('exerciseName').value;
-    const duration = parseInt(document.getElementById('duration').value);
+    const durationInput = document.getElementById('duration').value;
+    const regex = /^(\d{1,2}):(\d{2})$/;
+    const match = durationInput.match(regex);
 
-    if (name && duration) {
+    if (name && match) {
+        const minutes = parseInt(match[1]) || 0; // MM
+        const seconds = parseInt(match[2]) || 0; // SS
+        const totalDuration = (minutes * 60) + seconds;
+
         const exercise = {
             name: name,
-            duration: duration * 60, 
+            duration: totalDuration, 
             completed: false,
             executionTime: 0
         };
         exercises.push(exercise);
         renderExercises();
         document.getElementById('startBtn').disabled = false;
+    } else {
+        alert('Please enter a valid duration in the format MM:SS');
     }
 });
+
 function renderExercises() {
     const exerciseList = document.getElementById('exerciseList');
     exerciseList.innerHTML = '';
     exercises.forEach((exercise, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span>${exercise.name} - ${exercise.duration / 60} min</span>
-            <button class="skipBtn" data-index="${index}">Skip</button>
+            <span>${exercise.name} - ${formatTime(exercise.duration)}</span>
+            ${index === currentExerciseIndex ? `<button class="skipBtn" data-index="${index}">Skip</button>` : ''}
         `;
         exerciseList.appendChild(li);
     });
@@ -38,14 +47,16 @@ function renderExercises() {
         button.addEventListener('click', skipExercise);
     });
 }
+
 document.getElementById('startBtn').addEventListener('click', () => {
     if (exercises.length > 0) {
-        document.getElementById('startBtn').disabled = true;
+        document.getElementById('startBtn').style.display = 'none'; // Hide the Start button
         pauseResumeBtn.disabled = false;
         endTaskBtn.disabled = false;
         startExercise(currentExerciseIndex);
     }
 });
+
 pauseResumeBtn.addEventListener('click', () => {
     if (!isPaused) {
         pauseTimer();
@@ -53,6 +64,7 @@ pauseResumeBtn.addEventListener('click', () => {
         resumeTimer();
     }
 });
+
 endTaskBtn.addEventListener('click', () => {
     clearInterval(timer);
     saveSummaryAndNavigate();
@@ -65,13 +77,13 @@ function startExercise(index) {
     }
     const exercise = exercises[index];
     remainingTime = exercise.duration;
-    timerDisplay.textContent = `Exercise: ${exercise.name} - Remaining Time: ${formatTime(remainingTime)}`;
+    timerDisplay.textContent = `${formatTime(remainingTime)}`;
 
     timer = setInterval(() => {
         if (remainingTime > 0) {
             remainingTime--;
             exercise.executionTime++;
-            timerDisplay.textContent = `Exercise: ${exercise.name} - Remaining Time: ${formatTime(remainingTime)}`;
+            timerDisplay.textContent = `${formatTime(remainingTime)}`;
         } else {
             clearInterval(timer);
             exercise.completed = true;
@@ -93,7 +105,7 @@ function resumeTimer() {
         if (remainingTime > 0) {
             remainingTime--;
             exercises[currentExerciseIndex].executionTime++;
-            timerDisplay.textContent = ` Remaining Time: ${formatTime(remainingTime)}`;
+            timerDisplay.textContent = `${formatTime(remainingTime)}`;
         } else {
             clearInterval(timer);
             exercises[currentExerciseIndex].completed = true;
@@ -111,8 +123,6 @@ function startBreak() {
         if (breakTime > 0) {
             breakTime--;
             timerDisplay.textContent = `Break - Remaining Time: ${formatTime(breakTime)}`;
-            
-
         } else {
             clearInterval(timer);
             skipBreakBtn.style.display = 'none'; 
@@ -121,12 +131,13 @@ function startBreak() {
     }, 1000);
 }
 
-
 function startNextExercise() {
     currentExerciseIndex++; 
     if (currentExerciseIndex < exercises.length) {
+        renderExercises(); // Update the exercise list to show the current exercise
         startExercise(currentExerciseIndex);  
     } else {
+        // No break, directly save the summary after the last exercise
         saveSummaryAndNavigate();  
     }
 }
@@ -138,6 +149,7 @@ function skipExercise(event) {
     }
     startBreak();
 }
+
 function saveSummaryAndNavigate() {
     const summary = exercises.map(exercise => ({
         name: exercise.name,
@@ -159,10 +171,5 @@ skipBreakBtn.addEventListener('click', () => {
     skipBreakBtn.style.display = 'none';
     startNextExercise();
 });
-
-
-
-
-
 
 
