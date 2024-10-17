@@ -12,18 +12,25 @@
         
         <div id="exercise-form">
             <label for="exerciseName">Exercise Name:</label>
-            <input type="text" id="exerciseName" placeholder="Enter exercise name">
+    <input type="text" id="exerciseName" placeholder="Enter exercise name">
 
-            <label for="duration">Time Duration (MM:SS):</label>
-            <input type="text" id="duration" placeholder="Enter duration (e.g. 02:30)">
-
+    <label for="duration">Time Duration:</label>
+    <div id="timeInputs">
+        <input type="number" id="minutesInput" placeholder="Minutes" min="0">
+        <input type="number" id="secondsInput" placeholder="Seconds" min="0" max="59">
+    </div>
             <button id="addExerciseBtn">Add to Workout</button>
         </div>
 
         <ul id="exerciseList"></ul>
 
         <button id="startBtn" disabled>Start</button>
-        <div id="timerDisplay"></div>
+        <div id="timerDisplay">
+            <div class="timer-box" id="minutes">00</div>
+            <div id="colon">:</div>
+            <div class="timer-box" id="seconds">00</div>
+        </div>
+        
         <div id="controls">
             <button id="pauseResumeBtn" disabled>Pause</button>
             <button id="endTaskBtn" disabled>End Task</button>

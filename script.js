@@ -7,30 +7,42 @@ const timerDisplay = document.getElementById('timerDisplay');
 const pauseResumeBtn = document.getElementById('pauseResumeBtn');
 const endTaskBtn = document.getElementById('endTaskBtn');
 const skipBreakBtn = document.getElementById('skipBreakBtn');
+
+
+function loadExercisesFromLocalStorage() {
+    const storedExercises = localStorage.getItem('exercises');
+    if (storedExercises) {
+        exercises = JSON.parse(storedExercises);
+        renderExercises(); 
+    }
+}
+
 document.getElementById('addExerciseBtn').addEventListener('click', () => {
     const name = document.getElementById('exerciseName').value;
-    const durationInput = document.getElementById('duration').value;
-    const regex = /^(\d{1,2}):(\d{2})$/;
-    const match = durationInput.match(regex);
+    const minutes = parseInt(document.getElementById('minutesInput').value) || 0; 
+    const seconds = parseInt(document.getElementById('secondsInput').value) || 0; 
 
-    if (name && match) {
-        const minutes = parseInt(match[1]) || 0; // MM
-        const seconds = parseInt(match[2]) || 0; // SS
+    if (name && (minutes >= 0 || seconds >= 0)) {
         const totalDuration = (minutes * 60) + seconds;
 
         const exercise = {
             name: name,
-            duration: totalDuration, 
+            duration: totalDuration,
             completed: false,
             executionTime: 0
         };
         exercises.push(exercise);
+        saveExercisesToLocalStorage(); 
         renderExercises();
         document.getElementById('startBtn').disabled = false;
     } else {
-        alert('Please enter a valid duration in the format MM:SS');
+        alert('Please enter a valid exercise name and duration.');
     }
 });
+
+function saveExercisesToLocalStorage() {
+    localStorage.setItem('exercises', JSON.stringify(exercises));
+}
 
 function renderExercises() {
     const exerciseList = document.getElementById('exerciseList');
@@ -50,7 +62,7 @@ function renderExercises() {
 
 document.getElementById('startBtn').addEventListener('click', () => {
     if (exercises.length > 0) {
-        document.getElementById('startBtn').style.display = 'none'; // Hide the Start button
+        document.getElementById('startBtn').style.display = 'none'; 
         pauseResumeBtn.disabled = false;
         endTaskBtn.disabled = false;
         startExercise(currentExerciseIndex);
@@ -75,15 +87,16 @@ function startExercise(index) {
         saveSummaryAndNavigate();
         return;
     }
+
     const exercise = exercises[index];
     remainingTime = exercise.duration;
-    timerDisplay.textContent = `${formatTime(remainingTime)}`;
+    timerDisplay.textContent = `${formatTime(remainingTime)}`; 
 
     timer = setInterval(() => {
         if (remainingTime > 0) {
             remainingTime--;
             exercise.executionTime++;
-            timerDisplay.textContent = `${formatTime(remainingTime)}`;
+            timerDisplay.textContent = `${formatTime(remainingTime)}`; 
         } else {
             clearInterval(timer);
             exercise.completed = true;
@@ -115,14 +128,14 @@ function resumeTimer() {
 }
 
 function startBreak() {
-    let breakTime = 30;
+    let breakTime = 30; 
     timerDisplay.textContent = `Break - Remaining Time: ${formatTime(breakTime)}`;
     skipBreakBtn.style.display = 'inline-block';
 
     timer = setInterval(() => {
         if (breakTime > 0) {
             breakTime--;
-            timerDisplay.textContent = `Break - Remaining Time: ${formatTime(breakTime)}`;
+            timerDisplay.textContent = `Break - Remaining Time: ${formatTime(breakTime)}`; 
         } else {
             clearInterval(timer);
             skipBreakBtn.style.display = 'none'; 
@@ -134,10 +147,10 @@ function startBreak() {
 function startNextExercise() {
     currentExerciseIndex++; 
     if (currentExerciseIndex < exercises.length) {
-        renderExercises(); // Update the exercise list to show the current exercise
+        renderExercises(); 
         startExercise(currentExerciseIndex);  
     } else {
-        // No break, directly save the summary after the last exercise
+    
         saveSummaryAndNavigate();  
     }
 }
@@ -151,25 +164,33 @@ function skipExercise(event) {
 }
 
 function saveSummaryAndNavigate() {
+    localStorage.removeItem('exercises'); 
+
     const summary = exercises.map(exercise => ({
         name: exercise.name,
         timeSpent: exercise.executionTime,
         duration: exercise.duration
     }));
+
     localStorage.setItem('exerciseSummary', JSON.stringify(summary));
     window.location.href = 'summary.html';
 }
+
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
+loadExercisesFromLocalStorage();
 
 skipBreakBtn.addEventListener('click', () => {
     clearInterval(timer);
     skipBreakBtn.style.display = 'none';
     startNextExercise();
 });
+
+
+
 
 

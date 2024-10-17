@@ -10,6 +10,7 @@ h1 {
     margin-bottom: 20px;
     color: black;
 }
+
 .container {
     max-width: 600px;
     margin: 0 auto;
@@ -18,6 +19,8 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* Input Fields */
 input[type="text"],
 input[type="number"] {
     width: 100%;
@@ -27,15 +30,31 @@ input[type="number"] {
     border-radius: 5px;
     font-size: 16px;
 }
+
+/* Flexbox for Time Inputs */
+#timeInputs {
+    display: flex;
+    justify-content: space-between; /* Space inputs apart */
+    align-items: center; /* Center items vertically */
+}
+
+/* Individual Time Input Styling */
+#minutesInput, #secondsInput {
+    width: 48%; /* Adjust width to leave space for margin */
+}
+
+/* General Button Styling */
 button {
-    padding: 10px 15px;
+    padding: 10px 20px;
     margin: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 16px;
 }
 
+/* Individual Button Styling */
 #addExerciseBtn {
     background-color: #28a745;
     color: white;
@@ -81,20 +100,39 @@ button {
     background-color: #e67e22;
 }
 
-
+/* Timer Styling - Consistent Appearance */
 #timerDisplay {
-    font-size: 48px; /* Large font for the timer */
-    color: #333;
-    text-align: center;
-    background-color: #e0e0e0; /* Light background for contrast */
-    border: 5px solid #4CAF50; /* Green border */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px; /* Space inside the box */
-    margin: 20px 0; /* Space around the timer display */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(40, 167, 69, 0.8); /* Consistent background */
+    border: 5px solid #28a745;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease; /* Removed transform and hover effects */
 }
 
+/* Timer Boxes */
+.timer-box {
+    font-size: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
+/* Keep hover effect minimal */
+#timerDisplay:hover .timer-box {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Exercise List Styling */
 .exercise-list {
     margin: 20px 0;
     padding: 0;
@@ -111,6 +149,7 @@ button {
     border-radius: 5px;
 }
 
+/* Delete Button for Exercises */
 .exercise-list button {
     background-color: #dc3545;
     color: white;
@@ -124,6 +163,21 @@ button {
     background-color: #c82333;
 }
 
+/* Media Query for Laptop Mode (768px to 1200px) */
+@media (min-width: 768px) and (max-width: 1200px) {
+    button {
+        padding: 12px 30px;
+        font-size: 18px;
+        width: 50%;
+    }
+
+    #addExerciseBtn, #startBtn, #pauseResumeBtn, #endTaskBtn, #skipBreakBtn {
+        display: inline-block;
+        margin: 10px auto;
+    }
+}
+
+/* Media Queries for Smaller Screens (max-width: 600px) */
 @media (max-width: 600px) {
     body {
         padding: 10px;
@@ -135,21 +189,26 @@ button {
 
     button {
         width: 100%;
+        font-size: 14px;
     }
 }
+
+/* Background Styling */
 body::before {
     content: "";
     background: url('https://media.istockphoto.com/id/1324813307/photo/empty-yoga-class-with-exercise-mats-on-parquet-floor-and-walled-garden-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=chbr92G0m9RZ5_-pCGnHQqANmvgzKihHdxl9SeAQqL4=') no-repeat center center fixed;
-    opacity: 0.1; 
+    opacity: 0.1;
     height: 100%;
     width: 100%;
     position: absolute;
     z-index: -1;
 }
-body{
+
+body {
     padding: 6rem 0;
     background: url("https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
     background-attachment: fixed;
     position: relative;
     z-index: 4;
 }
+
